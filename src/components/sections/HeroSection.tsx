@@ -5,6 +5,7 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useSmoothScroll } from '../../hooks/useSmoothScroll';
 import { gsap } from 'gsap';
+import { getDriveUrl, getAssetById } from '../../data/driveAssets';
 import '../../styles/animations.css';
 
 export const HeroSection: React.FC = () => {
@@ -16,9 +17,32 @@ export const HeroSection: React.FC = () => {
   const [currentRole, setCurrentRole] = useState('');
   const fireball1Ref = useRef<HTMLDivElement>(null);
   const fireball2Ref = useRef<HTMLDivElement>(null);
-  const roleTextRef = useRef<HTMLDivElement>(null);
+  const roleIconsRef = useRef<HTMLDivElement>(null);
   const photoRef = useRef<HTMLDivElement>(null);
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
 
+  const roles = [
+    { 
+      name: 'AI Engineer', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg',
+      color: '#ff6f00'
+    },
+    { 
+      name: 'DevOps Engineer', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
+      color: '#2496ed'
+    },
+    { 
+      name: 'Software Engineer', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+      color: '#61dafb'
+    },
+    { 
+      name: 'Full Stack Developer', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+      color: '#339933'
+    }
+  ];
   const getRandomPosition = () => {
     const section = document.getElementById('hero');
     if (!section) return { x: 0, y: 0 };
@@ -49,33 +73,58 @@ export const HeroSection: React.FC = () => {
   };
 
   const animateRoles = () => {
-    const roles = [' AI Engineer', ' DevOps Engineer', ' Software Engineer'];
-    let currentIndex = 0;
-
-    const showNextRole = () => {
-      setCurrentRole(roles[currentIndex]);
-      gsap.to(roleTextRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.4,
-        ease: 'power2.out',
-        onComplete: () => {
-          setTimeout(() => {
-            gsap.to(roleTextRef.current, {
-              opacity: 0,
-              y: -20,
-              duration: 0.4,
-              onComplete: () => {
-                currentIndex = (currentIndex + 1) % roles.length;
-                showNextRole();
-              }
-            });
-          }, 2000); // Show each role for 2 seconds
-        }
-      });
-    };
-
-    showNextRole();
+    if (roleIconsRef.current) {
+      const icons = roleIconsRef.current.querySelectorAll('.role-rotating-icon');
+      
+      const animateIcon = (index: number) => {
+        const icon = icons[index];
+        if (!icon) return;
+        
+        // Start from top, move to bottom
+        gsap.fromTo(icon, 
+          { 
+            y: -100, 
+            opacity: 0, 
+            scale: 0.5,
+            rotation: -180
+          },
+          { 
+            y: 0, 
+            opacity: 1, 
+            scale: 1,
+            rotation: 0,
+            duration: 1,
+            ease: 'power2.out',
+            onComplete: () => {
+              // Show role text when icon reaches bottom
+              setCurrentRole(roles[index].name);
+              setCurrentRoleIndex(index);
+              
+              // Keep visible for 2 seconds
+              setTimeout(() => {
+                // Animate out
+                gsap.to(icon, {
+                  y: 100,
+                  opacity: 0,
+                  scale: 0.5,
+                  rotation: 180,
+                  duration: 0.8,
+                  ease: 'power2.in',
+                  onComplete: () => {
+                    // Move to next role
+                    const nextIndex = (index + 1) % roles.length;
+                    setTimeout(() => animateIcon(nextIndex), 500);
+                  }
+                });
+              }, 2000);
+            }
+          }
+        );
+      };
+      
+      // Start the animation cycle
+      animateIcon(0);
+    }
   };
 
   const animatePhoto = () => {
@@ -262,16 +311,47 @@ export const HeroSection: React.FC = () => {
               </motion.div>
             </div>
 
-            {/* Role Text */}
-            <div
-              ref={roleTextRef}
-              className="role-text"
-              style={{
-                color: theme.mode === 'theatrical' ? '#FFD700' : '#00FFFF',
-                textShadow: `0 0 10px ${theme.mode === 'theatrical' ? '#FFD700' : '#00FFFF'}`
-              }}
-            >
-              {currentRole}
+            <div className="relative mt-8">
+              {/* Rotating Role Icons */}
+              <div 
+                ref={roleIconsRef}
+                className="relative h-20 flex items-center justify-center"
+              >
+                {roles.map((role, index) => (
+                  <div
+                    key={role.name}
+                    className="role-rotating-icon absolute"
+                    style={{ opacity: 0 }}
+                  >
+                    <img 
+                      src={role.icon} 
+                      alt={role.name}
+                      className="w-12 h-12 md:w-16 md:h-16 object-contain"
+                      style={{ filter: `drop-shadow(0 0 10px ${role.color})` }}
+                    />
+                  </div>
+                ))}
+              </div>
+              
+              {/* Role Text Display */}
+              <motion.div
+                className="text-center mt-4"
+                animate={{ 
+                  opacity: currentRole ? 1 : 0,
+                  y: currentRole ? 0 : 20
+                }}
+                transition={{ duration: 0.5 }}
+              >
+                <span 
+                  className="text-xl md:text-2xl font-tech font-bold"
+                  style={{
+                    color: roles[currentRoleIndex]?.color || (theme.mode === 'theatrical' ? '#FFD700' : '#00FFFF'),
+                    textShadow: `0 0 10px ${roles[currentRoleIndex]?.color || (theme.mode === 'theatrical' ? '#FFD700' : '#00FFFF')}`
+                  }}
+                >
+                  {currentRole}
+                </span>
+              </motion.div>
             </div>
           </div>
 
@@ -343,7 +423,7 @@ export const HeroSection: React.FC = () => {
             <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white/20 backdrop-blur-sm">
               {/* Photo */}
               <motion.img
-                src="/img/manoj.jpg"
+                src={getDriveUrl(getAssetById('manoj-profile-main')?.driveId || '', 'image') || "/img/manoj.jpg"}
                 alt="Manoj MS"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 whileHover={{ scale: 1.1 }}

@@ -382,7 +382,18 @@ export const SkillsSection: React.FC = () => {
                           }}
                           transition={{ duration: 0.5 }}
                         >
-                          {skill.icon}
+                          <img 
+                            src={skill.icon} 
+                            alt={skill.name}
+                            className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto object-contain"
+                            loading="lazy"
+                            onError={(e) => {
+                              // Fallback to a default icon if image fails to load
+                              const target = e.target as HTMLImageElement;
+                              target.style.display = 'none';
+                              target.parentElement!.innerHTML = '⚡';
+                            }}
+                          />
                         </motion.div>
 
                         {/* Skill Name */}
