@@ -343,10 +343,11 @@ export const HeroSection: React.FC = () => {
                 transition={{ duration: 0.5 }}
               >
                 <span 
-                  className="text-xl md:text-2xl font-tech font-bold"
+                  className={`text-xl md:text-2xl font-tech font-bold ${
+                    theme.mode === 'theatrical' ? 'text-theatrical-gold' : 'text-tech-cyan'
+                  }`}
                   style={{
-                    color: roles[currentRoleIndex]?.color || (theme.mode === 'theatrical' ? '#FFD700' : '#00FFFF'),
-                    textShadow: `0 0 10px ${roles[currentRoleIndex]?.color || (theme.mode === 'theatrical' ? '#FFD700' : '#00FFFF')}`
+                    textShadow: `0 0 10px ${theme.mode === 'theatrical' ? '#FFD700' : '#00FFFF'}`
                   }}
                 >
                   {currentRole}
