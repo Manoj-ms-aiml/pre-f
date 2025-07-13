@@ -249,7 +249,7 @@ export const HeroSection: React.FC = () => {
                 : 'text-tech-electric'
             }`}>
               <br></br>
-              Hi, I'm
+              {' '}Hi, I'm
             </span>
             <span className={`text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold block ${
               theme.mode === 'theatrical'
