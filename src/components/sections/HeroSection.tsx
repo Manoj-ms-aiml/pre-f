@@ -5,7 +5,8 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useSmoothScroll } from '../../hooks/useSmoothScroll';
 import { gsap } from 'gsap';
-import { getAssetById } from '../../data/assets';
+import { getAssetById, getFallbackImage } from '../../data/assets';
+import { ImageWithFallback } from '../common/ImageWithFallback';
 import '../../styles/animations.css';
 
 export const HeroSection: React.FC = () => {
@@ -425,11 +426,12 @@ export const HeroSection: React.FC = () => {
             {/* Photo Container */}
             <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white/20 backdrop-blur-sm">
               {/* Photo */}
-              <motion.img
+              <ImageWithFallback
                 src={getAssetById('manoj-profile-main')?.path || "/img/manoj.jpg"}
+                fallbackSrc={getFallbackImage('profile')}
                 alt="Manoj MS"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                whileHover={{ scale: 1.1 }}
+                loading="eager"
               />
               
               {/* Overlay Gradient */}

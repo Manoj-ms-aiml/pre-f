@@ -10,9 +10,16 @@ import { ExperienceSection } from './components/sections/ExperienceSection';
 import { SkillsSection } from './components/sections/SkillsSection';
 import { ContactSection } from './components/sections/ContactSection';
 import AnimatedIntro from './components/common/AnimatedIntro';
+import { autoLoadAssets } from './data/assets';
+import { useEffect } from 'react';
 
 function App() {
   const [showIntro, setShowIntro] = useState(true);
+
+  // Auto-load assets on app start
+  useEffect(() => {
+    autoLoadAssets().catch(console.error);
+  }, []);
 
   const handleIntroComplete = () => {
     setShowIntro(false);

@@ -364,28 +364,103 @@ export const getAssetsByCategory = (category: LocalAsset['category']): LocalAsse
 export const preloadImage = (url: string): Promise<void> => {
   return new Promise((resolve, reject) => {
     const img = new Image();
-    img.onload = () => resolve();
-    img.onerror = reject;
+    img.onload = () => {
+      console.log(`✅ Image loaded: ${url}`);
+      resolve();
+    };
+    img.onerror = (error) => {
+      console.warn(`❌ Image failed to load: ${url}`, error);
+      reject(error);
+    };
     img.src = url;
   });
 };
 
 // Function to preload multiple images
 export const preloadImages = async (urls: string[]): Promise<void> => {
+  console.log(`🔄 Preloading ${urls.length} images...`);
   try {
-    await Promise.all(urls.map(url => preloadImage(url)));
+    const results = await Promise.allSettled(urls.map(url => preloadImage(url)));
+    const successful = results.filter(result => result.status === 'fulfilled').length;
+    const failed = results.filter(result => result.status === 'rejected').length;
+    console.log(`✅ Preloaded ${successful}/${urls.length} images successfully`);
+    if (failed > 0) {
+      console.warn(`⚠️ ${failed} images failed to preload`);
+    }
   } catch (error) {
     console.warn('Some images failed to preload:', error);
   }
 };
 
+// Function to check if image exists
+export const checkImageExists = async (url: string): Promise<boolean> => {
+  try {
+    await preloadImage(url);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+// Function to get optimized image URL
+export const getOptimizedImageUrl = (url: string, width?: number, height?: number): string => {
+  // If it's a Pexels URL, add optimization parameters
+  if (url.includes('pexels.com')) {
+    const urlObj = new URL(url);
+    if (width) urlObj.searchParams.set('w', width.toString());
+    if (height) urlObj.searchParams.set('h', height.toString());
+    urlObj.searchParams.set('auto', 'compress');
+    urlObj.searchParams.set('cs', 'tinysrgb');
+    return urlObj.toString();
+  }
+  return url;
+};
+
 // Function to get fallback image for missing assets
 export const getFallbackImage = (category: LocalAsset['category']): string => {
   const fallbacks = {
-    profile: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=400',
-    project: 'https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&w=800',
-    certificate: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800',
-    experience: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800'
+    profile: getOptimizedImageUrl('https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg', 400),
+    project: getOptimizedImageUrl('https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg', 800),
+    certificate: getOptimizedImageUrl('https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg', 800),
+    experience: getOptimizedImageUrl('https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg', 800)
   };
   return fallbacks[category];
+};
+
+// Auto-detect and load local assets
+export const autoLoadAssets = async (): Promise<void> => {
+  console.log('🔍 Auto-detecting local assets...');
+  
+  const allAssets = [...profileAssets, ...projectAssets, ...certificateAssets, ...experienceAssets];
+  const assetUrls = allAssets.map(asset => asset.path);
+  
+  // Check which assets exist
+  const existingAssets = await Promise.allSettled(
+    assetUrls.map(async (url) => {
+      const exists = await checkImageExists(url);
+      return { url, exists };
+    })
+  );
+  
+  const availableAssets = existingAssets
+    .filter(result => result.status === 'fulfilled' && result.value.exists)
+    .map(result => result.status === 'fulfilled' ? result.value.url : '');
+  
+  console.log(`📁 Found ${availableAssets.length}/${assetUrls.length} local assets`);
+  
+  // Preload available assets
+  if (availableAssets.length > 0) {
+    await preloadImages(availableAssets);
+  }
+  
+  // Preload fallback images
+  const fallbackUrls = Object.values({
+    profile: getFallbackImage('profile'),
+    project: getFallbackImage('project'),
+    certificate: getFallbackImage('certificate'),
+    experience: getFallbackImage('experience')
+  });
+  
+  console.log('🔄 Preloading fallback images...');
+  await preloadImages(fallbackUrls);
 };
