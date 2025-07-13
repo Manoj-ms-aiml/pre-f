@@ -260,7 +260,7 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* Role Icons */}
-          <div className="relative mt-6 lg:mt-8 flex flex-col items-center lg:items-start">
+          <div className="relative">
             <div className="flex justify-center lg:justify-start items-center space-x-6 md:space-x-8">
               <motion.div
                 className="role-icon p-3 md:p-4 rounded-full border-2"
