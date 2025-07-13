@@ -80,19 +80,19 @@ export const HeroSection: React.FC = () => {
         const icon = icons[index];
         if (!icon) return;
         
-        // Start from center (where code icon is), move down and back
+        // Start from top, move to bottom
         gsap.fromTo(icon, 
           { 
-            y: 0, 
+            y: -100, 
             opacity: 0, 
             scale: 0.5,
-            rotation: 0
+            rotation: -180
           },
           { 
-            y: 20, 
+            y: 0, 
             opacity: 1, 
             scale: 1,
-            rotation: 360,
+            rotation: 0,
             duration: 1,
             ease: 'power2.out',
             onComplete: () => {
@@ -104,10 +104,10 @@ export const HeroSection: React.FC = () => {
               setTimeout(() => {
                 // Animate out
                 gsap.to(icon, {
-                  y: 0,
+                  y: 100,
                   opacity: 0,
                   scale: 0.5,
-                  rotation: 720,
+                  rotation: 180,
                   duration: 0.8,
                   ease: 'power2.in',
                   onComplete: () => {
@@ -260,8 +260,8 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* Role Icons */}
-          <div className="relative mt-6 lg:mt-8 flex flex-col items-center">
-            <div className="flex justify-center items-center space-x-6 md:space-x-8">
+          <div className="relative mt-6 lg:mt-8 flex flex-col items-center lg:items-start">
+            <div className="flex justify-center lg:justify-start items-center space-x-6 md:space-x-8">
               <motion.div
                 className="role-icon p-3 md:p-4 rounded-full border-2"
                 whileHover={{ scale: 1.2, rotate: 360 }}
@@ -280,7 +280,6 @@ export const HeroSection: React.FC = () => {
               >
                 ×
               </motion.div>
-              {/* Central Source Icon - Code Icon */}
               <motion.div
                 className="role-icon p-3 md:p-4 rounded-full border-2"
                 whileHover={{ scale: 1.2, rotate: -360 }}
@@ -312,16 +311,16 @@ export const HeroSection: React.FC = () => {
               </motion.div>
             </div>
 
-            <div className="relative mt-6 lg:mt-8 w-full flex flex-col items-center">
+            <div className="relative mt-6 lg:mt-8 w-full">
               {/* Rotating Role Icons */}
               <div 
                 ref={roleIconsRef}
-                className="relative h-16 lg:h-20 flex items-center justify-center"
+                className="relative h-16 lg:h-20 flex items-center justify-center lg:justify-center"
               >
                 {roles.map((role, index) => (
                   <div
                     key={role.name}
-                    className="role-rotating-icon absolute flex items-center justify-center"
+                    className="role-rotating-icon absolute"
                     style={{ opacity: 0 }}
                   >
                     <img 
@@ -332,33 +331,11 @@ export const HeroSection: React.FC = () => {
                     />
                   </div>
                 ))}
-                
-                {/* Central Reference Point - Always Visible Code Icon */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <motion.div
-                    className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 flex items-center justify-center"
-                    style={{
-                      borderColor: theme.mode === 'theatrical' ? '#DC143C' : '#8A2BE2',
-                      backgroundColor: theme.mode === 'theatrical' ? 'rgba(220, 20, 60, 0.2)' : 'rgba(138, 43, 226, 0.2)'
-                    }}
-                    animate={{ 
-                      scale: [1, 1.1, 1],
-                      opacity: [0.7, 1, 0.7]
-                    }}
-                    transition={{ 
-                      duration: 2, 
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  >
-                    <Code size={16} color={theme.mode === 'theatrical' ? '#DC143C' : '#8A2BE2'} />
-                  </motion.div>
-                </div>
               </div>
               
               {/* Role Text Display */}
               <motion.div
-                className="text-center mt-3 lg:mt-4"
+                className="text-center lg:text-center mt-3 lg:mt-4"
                 animate={{ 
                   opacity: currentRole ? 1 : 0,
                   y: currentRole ? 0 : 20
@@ -366,7 +343,7 @@ export const HeroSection: React.FC = () => {
                 transition={{ duration: 0.5 }}
               >
                 <span 
-                  className={`text-lg md:text-xl lg:text-2xl font-tech font-bold block text-center ${
+                  className={`text-lg md:text-xl lg:text-2xl font-tech font-bold block ${
                     theme.mode === 'theatrical' ? 'text-theatrical-gold' : 'text-tech-cyan'
                   }`}
                   style={{
