@@ -260,8 +260,8 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* Role Icons */}
-          <div className="relative">
-            <div className="flex justify-center lg:justify-start items-center space-x-6 md:space-x-8">
+                   <div className="relative">
+            <div className="relative h-20 flex justify-center justify-center items-center ">
               <motion.div
                 className="role-icon p-3 md:p-4 rounded-full border-2"
                 whileHover={{ scale: 1.2, rotate: 360 }}
@@ -310,28 +310,6 @@ export const HeroSection: React.FC = () => {
                 <Sparkles size={28} color={theme.mode === 'theatrical' ? '#FFF8DC' : '#39FF14'} />
               </motion.div>
             </div>
-
-            <div className="relative mt-6 lg:mt-8 w-full">
-              {/* Rotating Role Icons */}
-              <div 
-                ref={roleIconsRef}
-                className="relative h-16 lg:h-20 flex items-center justify-center lg:justify-center"
-              >
-                {roles.map((role, index) => (
-                  <div
-                    key={role.name}
-                    className="role-rotating-icon absolute"
-                    style={{ opacity: 0 }}
-                  >
-                    <img 
-                      src={role.icon} 
-                      alt={role.name}
-                      className="w-12 h-12 md:w-16 md:h-16 object-contain"
-                      style={{ filter: `drop-shadow(0 0 10px ${role.color})` }}
-                    />
-                  </div>
-                ))}
-              </div>
               
               {/* Role Text Display */}
               <motion.div
