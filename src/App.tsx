@@ -10,15 +10,23 @@ import { ExperienceSection } from './components/sections/ExperienceSection';
 import { SkillsSection } from './components/sections/SkillsSection';
 import { ContactSection } from './components/sections/ContactSection';
 import AnimatedIntro from './components/common/AnimatedIntro';
-import { autoLoadAssets } from './data/assets';
 import { useEffect } from 'react';
 
 function App() {
   const [showIntro, setShowIntro] = useState(true);
 
-  // Auto-load assets on app start
+  // Simplified asset loading
   useEffect(() => {
-    autoLoadAssets().catch(console.error);
+    // Preload critical images only
+    const criticalImages = [
+      '/img/manoj.jpg',
+      'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=400'
+    ];
+    
+    criticalImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
   }, []);
 
   const handleIntroComplete = () => {

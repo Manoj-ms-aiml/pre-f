@@ -57,20 +57,11 @@ export const HeroSection: React.FC = () => {
   };
 
   const animateFireballs = () => {
-    const moveFireball = (fireballRef: React.RefObject<HTMLDivElement>) => {
-      const pos = getRandomPosition();
-      
-      gsap.to(fireballRef.current, {
-        x: pos.x,
-        y: pos.y,
-        duration: 2 + Math.random() * 2,
-        ease: 'power2.inOut',
-        onComplete: () => moveFireball(fireballRef)
-      });
-    };
-
-    moveFireball(fireball1Ref);
-    moveFireball(fireball2Ref);
+    // Simplified fireball animation for better performance
+    if (fireball1Ref.current && fireball2Ref.current) {
+      fireball1Ref.current.style.animation = 'float 4s ease-in-out infinite';
+      fireball2Ref.current.style.animation = 'float 4s ease-in-out infinite 2s';
+    }
   };
 
   const animateRoles = () => {
@@ -131,22 +122,7 @@ export const HeroSection: React.FC = () => {
   const animatePhoto = () => {
     if (photoRef.current) {
       // Create floating animation for the photo
-      gsap.to(photoRef.current, {
-        y: -20,
-        duration: 2,
-        ease: 'power2.inOut',
-        yoyo: true,
-        repeat: -1
-      });
-
-      // Add rotation animation
-      gsap.to(photoRef.current, {
-        rotation: 5,
-        duration: 3,
-        ease: 'power2.inOut',
-        yoyo: true,
-        repeat: -1
-      });
+      photoRef.current.style.animation = 'float 6s ease-in-out infinite';
     }
   };
 
