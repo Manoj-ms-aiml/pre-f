@@ -295,6 +295,10 @@ export const CertificatesSection: React.FC = () => {
                       alt={filteredCertificates[currentIndex]?.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="eager"
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-t ${
+                      theme.mode === 'theatrical'
+                        ? 'from-black via-transparent to-theatrical-gold/20'
                         : 'from-black via-transparent to-tech-cyan/20'
                     }`} />
                     
