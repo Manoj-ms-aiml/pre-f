@@ -289,6 +289,13 @@ export const CertificatesSection: React.FC = () => {
                 >
                   {/* Certificate Image */}
                   <div className="relative h-48 sm:h-64 lg:h-80 overflow-hidden">
+                    {(() => {
+                      const gradientClass = theme.mode === 'theatrical'
+                        ? 'from-black via-transparent to-theatrical-gold/20'
+                        : 'from-black via-transparent to-tech-cyan/20';
+                      
+                      return (
+                        <>
                     <ImageWithFallback
                       src={filteredCertificates[currentIndex]?.image}
                       fallbackSrc={getFallbackImage('certificate')}
@@ -296,11 +303,10 @@ export const CertificatesSection: React.FC = () => {
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="eager"
                     />
-                    <div className={`absolute inset-0 bg-gradient-to-t ${
-                      theme.mode === 'theatrical'
-                        ? 'from-black via-transparent to-theatrical-gold/20'
-                        : 'from-black via-transparent to-tech-cyan/20'
-                    }`} />
+                          <div className={`absolute inset-0 bg-gradient-to-t ${gradientClass}`} />
+                        </>
+                      );
+                    })()}
                     
                     {/* Featured Badge */}
                     {filteredCertificates[currentIndex]?.featured && (
