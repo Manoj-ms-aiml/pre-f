@@ -1,139 +1,169 @@
-# Portfolio Setup Guide
+# Manoj MS Portfolio
 
-## Google Drive Integration Setup
+## Local Asset Management
 
-To use your own photos and videos from Google Drive, follow these steps:
+This portfolio uses a local asset management system for better performance and control. All assets are stored in the `public/assets` directory.
 
-### 1. Upload Your Assets to Google Drive
+## Asset Organization
 
-Upload all your photos and videos to Google Drive and organize them in folders:
-- Profile photos
-- Project screenshots/videos
-- Certificate images
-- Experience photos
-
-### 2. Get Google Drive File IDs
-
-For each file you want to use:
-
-1. Right-click on the file in Google Drive
-2. Select "Share" or "Get link"
-3. Change permissions to "Anyone with the link can view"
-4. Copy the sharing link
-5. Extract the file ID from the URL
-
-**Example URL:** `https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74mHxYjgpKY/view?usp=sharing`
-
-**File ID:** `1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74mHxYjgpKY`
-
-### 3. Update Drive Assets Configuration
-
-Open `src/data/driveAssets.ts` and replace the placeholder Drive IDs with your actual file IDs:
-
-```typescript
-// Example: Replace this
-driveId: 'YOUR_PROFILE_PHOTO_DRIVE_ID'
-
-// With your actual file ID
-driveId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74mHxYjgpKY'
+### Directory Structure
+```
+public/assets/
+├── images/
+│   ├── profile/          # Profile photos
+│   ├── projects/         # Project screenshots
+│   ├── certificates/     # Certificate images
+│   └── experience/       # Experience photos
+└── videos/
+    ├── projects/         # Project demo videos
+    └── experience/       # Experience videos
 ```
 
-### 4. Asset Categories
+### Asset Requirements
 
-Update the following asset categories with your Drive file IDs:
+#### Profile Images
+- **Format**: JPG/PNG
+- **Dimensions**: 400x400px (1:1 aspect ratio)
+- **Size**: < 500KB
+- **Quality**: High resolution for hero section display
+- **Background**: Preferably transparent or clean background
 
-#### Profile Assets
-- `manoj-profile-main`: Your main profile photo for the hero section
+#### Project Images
+- **Format**: JPG/PNG/WebP
+- **Dimensions**: 800x600px (4:3 aspect ratio) for main images
+- **Thumbnails**: 400x300px (4:3 aspect ratio)
+- **Size**: < 1MB per image
+- **Quality**: High enough to show project details clearly
+- **Content**: Screenshots, UI mockups, architecture diagrams
 
-#### Project Assets
-- `stickman-shootout-1`, `stickman-shootout-2`: Stickman Shootout project images
-- `emotion-recognition-1`: Emotion recognition project image
-- `emotion-recognition-video`: Demo video of emotion recognition (optional)
-- `breast-cancer-1`: Breast cancer AI project image
-- `apollo-health-1`: Apollo Health website screenshot
-- `astro-santhvana-1`: Astro Santhvana app screenshot
+#### Project Videos
+- **Format**: MP4 (H.264 codec recommended)
+- **Dimensions**: 1920x1080px (16:9 aspect ratio) or 1280x720px
+- **Duration**: 30 seconds to 2 minutes maximum
+- **Size**: < 10MB per video
+- **Quality**: 30fps, good compression
+- **Content**: Demo videos, project walkthroughs
 
-#### Certificate Assets
-- `aws-certificate`: AWS Cloud Practitioner certificate
-- `tensorflow-certificate`: TensorFlow Developer certificate
-- `azure-certificate`: Azure Fundamentals certificate
-- `docker-certificate`: Docker Certified Associate certificate
-- `kubernetes-certificate`: Kubernetes Administrator certificate
-- `react-certificate`: Advanced React certificate
-- `python-certificate`: Python for Data Science certificate
-- `gcp-certificate`: Google Cloud Associate certificate
+#### Certificate Images
+- **Format**: JPG/PNG
+- **Dimensions**: 1200x900px (4:3 aspect ratio)
+- **Size**: < 800KB
+- **Quality**: High resolution to show certificate details
+- **Content**: Official certificates, completion badges
 
-#### Experience Assets
-- `tech-solutions-1`, `tech-solutions-2`: Tech Solutions internship photos
-- `ai-lab-1`, `ai-lab-2`: AI Research Lab photos
-- `startup-1`, `startup-2`: Startup Accelerator photos
-- `enterprise-1`, `enterprise-2`: Enterprise Solutions photos
+#### Experience Images
+- **Format**: JPG/PNG
+- **Dimensions**: 800x600px (4:3 aspect ratio)
+- **Size**: < 1MB per image
+- **Quality**: Professional quality
+- **Content**: Workplace photos, project images, team photos
 
-### 5. Features
+### How to Add Your Assets
 
-The Drive integration includes:
+1. **Prepare your assets** according to the specifications above
+2. **Place them in the appropriate directories** under `public/assets/`
+3. **Update the file paths** in `src/data/assets.ts`
 
-- **Automatic fallback**: If a Drive image fails to load, it falls back to placeholder images
+#### Example: Adding a Profile Photo
+1. Resize your photo to 400x400px
+2. Save it as `public/assets/images/profile/manoj-profile.jpg`
+3. The system will automatically use it (path is already configured)
+
+#### Example: Adding Project Images
+1. Prepare project screenshots (800x600px)
+2. Save them in `public/assets/images/projects/`
+3. Update the paths in `src/data/assets.ts` if needed
+
+### Asset Configuration
+
+All asset configurations are managed in `src/data/assets.ts`. Each asset includes:
+- **ID**: Unique identifier
+- **Name**: Descriptive name
+- **Type**: 'image' or 'video'
+- **Path**: Relative path from public directory
+- **Category**: Asset category
+- **Description**: What the asset shows
+- **Dimensions**: Required dimensions
+- **Size**: Maximum file size
+- **Requirements**: Specific requirements for the asset
+
+### Performance Features
+
+- **Automatic fallback**: If a local image fails to load, it falls back to placeholder images
 - **Lazy loading**: Images load only when needed for better performance
 - **Error handling**: Graceful handling of failed image loads
-- **Loading states**: Shows loading indicators while images are being fetched
-- **Video support**: Supports both images and videos from Google Drive
+- **Preloading**: Critical assets can be preloaded for faster display
+- **Optimized paths**: Direct file serving for better performance
 
-### 6. Performance Optimization
+### Image Optimization Tips
 
-The system includes:
+1. **Use appropriate formats**:
+   - JPG for photos with many colors
+   - PNG for images with transparency or few colors
+   - WebP for better compression (modern browsers)
+
+2. **Optimize file sizes**:
+   - Use tools like TinyPNG or ImageOptim
+   - Maintain quality while reducing file size
+   - Consider progressive JPEGs for larger images
+
+3. **Maintain aspect ratios**:
+   - Use the specified dimensions for consistency
+   - Crop images to fit the required aspect ratios
+   - Avoid stretching or distorting images
+
+### Video Optimization Tips
+
+1. **Use H.264 codec** for best browser compatibility
+2. **Compress videos** to reduce file size while maintaining quality
+3. **Keep videos short** (30 seconds to 2 minutes)
+4. **Use appropriate bitrates** for web delivery
+5. **Consider multiple formats** (MP4, WebM) for broader support
+
+## Development
+
+### Adding New Assets
+
+1. Add the asset file to the appropriate directory
+2. Update `src/data/assets.ts` with the new asset configuration
+3. Update the relevant data files (projects.ts, certificates.ts, etc.) if needed
+4. Test the asset loading in development
+
+### Utility Functions
+
+- `getAssetById(id)`: Get asset configuration by ID
+- `getAssetsByCategory(category)`: Get all assets in a category
+- `getFallbackImage(category)`: Get fallback image for a category
+- `preloadImages(urls)`: Preload multiple images for performance
+
+## Troubleshooting
+
+If assets don't load:
+1. Verify the file path is correct
+2. Ensure the file exists in the public directory
+3. Check that the file type is supported
+4. Verify file permissions and accessibility
+5. Check browser console for any loading errors
+
+The system will automatically fall back to placeholder images if local assets fail to load.
+
+## Features
+
+### 1. Local Asset Management
+- Organized directory structure for different asset types
+- Detailed specifications for each asset category
+- Automatic fallback system for missing assets
+- Performance optimized loading
+
+### 2. Responsive Design
+- Optimized for all screen sizes
+- Proper aspect ratio maintenance
+- Mobile-first approach
+
+### 3. Performance Optimization
+- Lazy loading for non-critical assets
 - Image preloading for critical assets
-- Lazy loading for non-critical images
-- Automatic error recovery with fallbacks
-- Optimized Drive URLs for faster loading
+- Efficient file serving
+- Automatic compression and optimization
 
-### 7. Usage Examples
-
-```typescript
-// Get a Drive URL for an image
-const imageUrl = getDriveUrl('your-file-id', 'image');
-
-// Get a Drive URL for a video
-const videoUrl = getDriveUrl('your-file-id', 'video');
-
-// Get an asset by ID
-const asset = getAssetById('manoj-profile-main');
-
-// Get all assets in a category
-const projectAssets = getAssetsByCategory('project');
-```
-
-### 8. Troubleshooting
-
-If images don't load:
-1. Verify the file ID is correct
-2. Ensure the file is shared publicly ("Anyone with the link can view")
-3. Check that the file type is supported (JPG, PNG, GIF for images; MP4, WebM for videos)
-4. The fallback images will display if Drive images fail
-
-## New Features Added
-
-### 1. Official Technology Logos
-- Replaced emoji icons with official technology logos from CDN
-- Uses devicons and official brand assets
-- Automatic fallback to default icons if logos fail to load
-
-### 2. Rotating Role Text with Icons
-- Role text now rotates around the profile photo
-- Each role has its own technology icon
-- Smooth animations with GSAP
-- Icons appear at the bottom of the photo and rotate through different roles
-
-### 3. Google Drive Integration
-- Dedicated folder structure for Drive assets
-- Dynamic loading of photos and videos
-- Automatic fallback to placeholder images
-- Performance optimized with lazy loading and preloading
-
-### 4. Enhanced Performance
-- Image preloading for critical assets
-- Lazy loading for better page speed
-- Error handling and graceful degradation
-- Optimized Drive URLs for faster access
-
-The portfolio now supports dynamic content loading from your Google Drive while maintaining excellent performance and user experience!
+The portfolio now uses a robust local asset management system for better performance, reliability, and control over your content!

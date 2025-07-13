@@ -5,7 +5,7 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useSmoothScroll } from '../../hooks/useSmoothScroll';
 import { gsap } from 'gsap';
-import { getDriveUrl, getAssetById } from '../../data/driveAssets';
+import { getAssetById, getFallbackImage } from '../../data/assets';
 import '../../styles/animations.css';
 
 export const HeroSection: React.FC = () => {
@@ -239,10 +239,10 @@ export const HeroSection: React.FC = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="text-center lg:text-left space-y-8"
+          className="text-center lg:text-left space-y-6 lg:space-y-8 order-2 lg:order-1"
         >
           {/* Main Title */}
-          <div className="space-y-4">
+          <div className="space-y-3 lg:space-y-4">
             <span className={`text-2xl md:text-3xl lg:text-4xl font-light block ${
               theme.mode === 'theatrical'
                 ? 'text-theatrical-spotlight'
@@ -250,17 +250,17 @@ export const HeroSection: React.FC = () => {
             }`}>
               Hi, I'm
             </span>
-            <span className={`text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold block ${
+            <h1 className={`text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold block ${
               theme.mode === 'theatrical'
                 ? 'bg-gradient-to-r from-theatrical-gold via-theatrical-spotlight to-theatrical-gold'
                 : 'bg-gradient-to-r from-tech-cyan via-tech-electric to-neural-purple'
-            } bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]`}>
+            } bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] leading-tight`}>
               MANOJ MS
-            </span>
+            </h1>
           </div>
 
           {/* Role Icons */}
-          <div className="relative">
+          <div className="relative mt-6 lg:mt-8">
             <div className="flex justify-center lg:justify-start items-center space-x-6 md:space-x-8">
               <motion.div
                 className="role-icon p-3 md:p-4 rounded-full border-2"
@@ -311,11 +311,11 @@ export const HeroSection: React.FC = () => {
               </motion.div>
             </div>
 
-            <div className="relative mt-8">
+            <div className="relative mt-6 lg:mt-8">
               {/* Rotating Role Icons */}
               <div 
                 ref={roleIconsRef}
-                className="relative h-20 flex items-center justify-center"
+                className="relative h-16 lg:h-20 flex items-center justify-center lg:justify-start"
               >
                 {roles.map((role, index) => (
                   <div
@@ -335,7 +335,7 @@ export const HeroSection: React.FC = () => {
               
               {/* Role Text Display */}
               <motion.div
-                className="text-center mt-4"
+                className="text-center lg:text-left mt-3 lg:mt-4"
                 animate={{ 
                   opacity: currentRole ? 1 : 0,
                   y: currentRole ? 0 : 20
@@ -343,7 +343,7 @@ export const HeroSection: React.FC = () => {
                 transition={{ duration: 0.5 }}
               >
                 <span 
-                  className={`text-xl md:text-2xl font-tech font-bold ${
+                  className={`text-lg md:text-xl lg:text-2xl font-tech font-bold ${
                     theme.mode === 'theatrical' ? 'text-theatrical-gold' : 'text-tech-cyan'
                   }`}
                   style={{
@@ -359,7 +359,7 @@ export const HeroSection: React.FC = () => {
           {/* Description */}
           <motion.p
             ref={subtitleRef}
-            className={`text-lg md:text-xl lg:text-2xl font-light ${
+            className={`text-base md:text-lg lg:text-xl font-light max-w-2xl mx-auto lg:mx-0 ${
               theme.mode === 'theatrical'
                 ? 'text-theatrical-spotlight'
                 : 'text-tech-electric'
@@ -369,7 +369,7 @@ export const HeroSection: React.FC = () => {
           </motion.p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+          <div className="flex flex-col sm:flex-row justify-center lg:justify-start space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
             <motion.button
               onClick={handleViewProjects}
               whileHover={{ scale: 1.05 }}
@@ -400,11 +400,11 @@ export const HeroSection: React.FC = () => {
         {/* Right Column - Photo */}
         <motion.div
           variants={itemVariants}
-          className="flex justify-center lg:justify-end"
+          className="flex justify-center lg:justify-end order-1 lg:order-2"
         >
           <div
             ref={photoRef}
-            className="relative group"
+            className="relative group mb-8 lg:mb-0"
           >
             {/* Outer Glow Ring */}
             <div className={`absolute -inset-4 rounded-full opacity-75 group-hover:opacity-100 transition-opacity duration-500 ${
@@ -424,7 +424,7 @@ export const HeroSection: React.FC = () => {
             <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white/20 backdrop-blur-sm">
               {/* Photo */}
               <motion.img
-                src={getDriveUrl(getAssetById('manoj-profile-main')?.driveId || '', 'image') || "/img/manoj.jpg"}
+                src={getAssetById('manoj-profile-main')?.path || "/img/manoj.jpg"}
                 alt="Manoj MS"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 whileHover={{ scale: 1.1 }}

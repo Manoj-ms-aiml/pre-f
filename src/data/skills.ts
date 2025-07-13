@@ -94,14 +94,14 @@ export const skills: Skill[] = [
     id: 'express', 
     name: 'Express.js', 
     category: 'web', 
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg', 
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original-wordmark.svg', 
     color: '#000000' 
   },
   { 
     id: 'flask', 
     name: 'Flask', 
     category: 'web', 
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg', 
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original-wordmark.svg', 
     color: '#000000' 
   },
   { 
@@ -168,35 +168,35 @@ export const skills: Skill[] = [
     id: 'leadership', 
     name: 'Leadership', 
     category: 'soft-skills', 
-    icon: 'https://cdn-icons-png.flaticon.com/512/1077/1077114.png', 
+    icon: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png', 
     color: '#ffd700' 
   },
   { 
     id: 'communication', 
     name: 'Communication', 
     category: 'soft-skills', 
-    icon: 'https://cdn-icons-png.flaticon.com/512/1077/1077063.png', 
+    icon: 'https://cdn-icons-png.flaticon.com/512/2991/2991148.png', 
     color: '#20b2aa' 
   },
   { 
     id: 'teamwork', 
     name: 'Team Collaboration', 
     category: 'soft-skills', 
-    icon: 'https://cdn-icons-png.flaticon.com/512/1077/1077012.png', 
+    icon: 'https://cdn-icons-png.flaticon.com/512/1534/1534938.png', 
     color: '#32cd32' 
   },
   { 
     id: 'problem-solving', 
     name: 'Problem Solving', 
     category: 'soft-skills', 
-    icon: 'https://cdn-icons-png.flaticon.com/512/1077/1077035.png', 
+    icon: 'https://cdn-icons-png.flaticon.com/512/2620/2620445.png', 
     color: '#9370db' 
   },
   { 
     id: 'adaptability', 
     name: 'Adaptability', 
     category: 'soft-skills', 
-    icon: 'https://cdn-icons-png.flaticon.com/512/1077/1077046.png', 
+    icon: 'https://cdn-icons-png.flaticon.com/512/3094/3094837.png', 
     color: '#ff69b4' 
   }
 ];
