@@ -256,7 +256,7 @@ export const HeroSection: React.FC = () => {
                 ? 'bg-gradient-to-r from-theatrical-gold via-theatrical-spotlight to-theatrical-gold'
                 : 'bg-gradient-to-r from-tech-cyan via-tech-electric to-neural-purple'
             } bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]`}>
-              MANOJ MS
+              {' '} MANOJ MS
             </span>
           </div>
 
