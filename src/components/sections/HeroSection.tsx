@@ -5,7 +5,7 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useSmoothScroll } from '../../hooks/useSmoothScroll';
 import { gsap } from 'gsap';
-import { getDriveUrl, getAssetById } from '../../data/driveAssets';
+import { getAssetById } from '../../data/assets';
 import '../../styles/animations.css';
 
 export const HeroSection: React.FC = () => {
@@ -425,7 +425,7 @@ export const HeroSection: React.FC = () => {
             <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white/20 backdrop-blur-sm">
               {/* Photo */}
               <motion.img
-                src={getDriveUrl(getAssetById('manoj-profile-main')?.driveId || '', 'image') || "/img/manoj.jpg"}
+                src={getAssetById('manoj-profile-main')?.path || "/img/manoj.jpg"}
                 alt="Manoj MS"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 whileHover={{ scale: 1.1 }}
