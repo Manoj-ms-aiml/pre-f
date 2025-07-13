@@ -260,7 +260,7 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* Role Icons */}
-          <div className="relative mt-6 lg:mt-8">
+          <div className="relative mt-6 lg:mt-8 flex flex-col items-center lg:items-start">
             <div className="flex justify-center lg:justify-start items-center space-x-6 md:space-x-8">
               <motion.div
                 className="role-icon p-3 md:p-4 rounded-full border-2"
@@ -311,11 +311,11 @@ export const HeroSection: React.FC = () => {
               </motion.div>
             </div>
 
-            <div className="relative mt-6 lg:mt-8">
+            <div className="relative mt-6 lg:mt-8 w-full">
               {/* Rotating Role Icons */}
               <div 
                 ref={roleIconsRef}
-                className="relative h-16 lg:h-20 flex items-center justify-center lg:justify-start"
+                className="relative h-16 lg:h-20 flex items-center justify-center lg:justify-center"
               >
                 {roles.map((role, index) => (
                   <div
@@ -335,7 +335,7 @@ export const HeroSection: React.FC = () => {
               
               {/* Role Text Display */}
               <motion.div
-                className="text-center lg:text-left mt-3 lg:mt-4"
+                className="text-center lg:text-center mt-3 lg:mt-4"
                 animate={{ 
                   opacity: currentRole ? 1 : 0,
                   y: currentRole ? 0 : 20
@@ -343,7 +343,7 @@ export const HeroSection: React.FC = () => {
                 transition={{ duration: 0.5 }}
               >
                 <span 
-                  className={`text-lg md:text-xl lg:text-2xl font-tech font-bold ${
+                  className={`text-lg md:text-xl lg:text-2xl font-tech font-bold block ${
                     theme.mode === 'theatrical' ? 'text-theatrical-gold' : 'text-tech-cyan'
                   }`}
                   style={{
@@ -352,6 +352,18 @@ export const HeroSection: React.FC = () => {
                 >
                   {currentRole}
                 </span>
+                
+                {/* Animated underline */}
+                <motion.div
+                  className={`w-24 h-0.5 mx-auto mt-2 ${
+                    theme.mode === 'theatrical'
+                      ? 'bg-gradient-to-r from-transparent via-theatrical-gold to-transparent'
+                      : 'bg-gradient-to-r from-transparent via-tech-cyan to-transparent'
+                  }`}
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: currentRole ? 1 : 0 }}
+                  transition={{ duration: 0.5 }}
+                />
               </motion.div>
             </div>
           </div>
