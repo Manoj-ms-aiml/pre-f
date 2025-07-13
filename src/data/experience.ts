@@ -1,4 +1,5 @@
 import { Experience } from '../types';
+import { getAssetById, getFallbackImage } from './assets';
 
 export const experiences: Experience[] = [
   {
@@ -9,8 +10,8 @@ export const experiences: Experience[] = [
     year: 2023,
     description: "Developed and maintained web applications using React and Node.js. Implemented RESTful APIs and integrated with databases. Collaborated with cross-functional teams to deliver high-quality software solutions.",
     images: [
-      "/images/experience/tech-solutions.jpg",
-      "/images/experience/tech-solutions-2.jpg"
+      getAssetById('tech-solutions-1')?.path || getFallbackImage('experience'),
+      getAssetById('tech-solutions-2')?.path || getFallbackImage('experience')
     ],
     category: "tech"
   },
@@ -22,8 +23,8 @@ export const experiences: Experience[] = [
     year: 2022,
     description: "Conducted research on natural language processing and computer vision. Implemented and evaluated machine learning models using Python and TensorFlow. Published research findings in academic conferences.",
     images: [
-      "/images/experience/ai-lab.jpg",
-      "/images/experience/ai-lab-2.jpg"
+      getAssetById('ai-lab-1')?.path || getFallbackImage('experience'),
+      getAssetById('ai-lab-2')?.path || getFallbackImage('experience')
     ],
     category: "research"
   },
@@ -35,8 +36,8 @@ export const experiences: Experience[] = [
     year: 2021,
     description: "Built scalable web applications using modern technologies. Implemented CI/CD pipelines and automated testing. Mentored junior developers and conducted code reviews.",
     images: [
-      "/images/experience/startup.jpg",
-      "/images/experience/startup-2.jpg"
+      getAssetById('startup-1')?.path || getFallbackImage('experience'),
+      getAssetById('startup-2')?.path || getFallbackImage('experience')
     ],
     category: "tech"
   },
@@ -48,8 +49,8 @@ export const experiences: Experience[] = [
     year: 2020,
     description: "Developed backend services using Java and Spring Boot. Created database schemas and optimized query performance. Participated in agile development processes and sprint planning.",
     images: [
-      "/images/experience/enterprise.jpg",
-      "/images/experience/enterprise-2.jpg"
+      getAssetById('enterprise-1')?.path || getFallbackImage('experience'),
+      getAssetById('enterprise-2')?.path || getFallbackImage('experience')
     ],
     category: "tech"
   }
