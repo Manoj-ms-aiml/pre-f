@@ -417,7 +417,35 @@ export const HeroSection: React.FC = () => {
                   : 'from-tech-matrix/30 via-transparent to-tech-cyan/20'
               }`} />
               
+<<<<<<< HEAD
              
+=======
+              {/* Floating Particles */}
+              <div className="absolute inset-0 pointer-events-none">
+                {[...Array(8)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className={`absolute w-2 h-2 rounded-full ${
+                      theme.mode === 'theatrical' ? 'bg-theatrical-gold' : 'bg-tech-cyan'
+                    }`}
+                    style={{
+                      top: `${Math.random() * 100}%`,
+                      left: `${Math.random() * 100}%`,
+                    }}
+                    animate={{
+                      y: [-20, 20, -20],
+                      opacity: [0.3, 1, 0.3],
+                      scale: [0.5, 1, 0.5],
+                    }}
+                    transition={{
+                      duration: 3 + Math.random() * 2,
+                      repeat: Infinity,
+                      delay: Math.random() * 2,
+                    }}
+                  />
+                ))}
+              </div>
+>>>>>>> 607451ce04bafb3836e806fd986a1018822accd2
             </div>
 
             {/* Rotating Tech Icons */}

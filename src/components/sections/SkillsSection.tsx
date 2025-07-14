@@ -415,7 +415,11 @@ export const SkillsSection: React.FC = () => {
                                   : 'bg-gradient-to-r from-tech-cyan to-neural-purple'
                               }`}
                               initial={{ width: 0 }}
+<<<<<<< HEAD
                               animate={{ width: `100%` }}
+=======
+                              animate={{ width: `85%` }}
+>>>>>>> 607451ce04bafb3836e806fd986a1018822accd2
                               transition={{ delay: 0.5 + index * 0.1, duration: 1 }}
                             />
                           </div>
@@ -425,6 +429,10 @@ export const SkillsSection: React.FC = () => {
                             animate={{ opacity: 1 }}
                             transition={{ delay: 1 + index * 0.1 }}
                           >
+<<<<<<< HEAD
+=======
+                            85%
+>>>>>>> 607451ce04bafb3836e806fd986a1018822accd2
                           </motion.span>
                         </div>
 

@@ -400,7 +400,12 @@ export const CertificatesSection: React.FC = () => {
                 <motion.p
                   className="text-white/80 font-body leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base"
                 >
+<<<<<<< HEAD
                   This certification validates my expertise in {filteredCertificates[currentIndex]?.category.replace('-', ' ')} and demonstrates my commitment to staying current with industry best practices and emerging technologies.
+=======
+                  This certification validates my expertise in {filteredCertificates[currentIndex]?.category.replace('-', ' ')} 
+                  and demonstrates my commitment to staying current with industry best practices and emerging technologies.
+>>>>>>> 607451ce04bafb3836e806fd986a1018822accd2
                 </motion.p>
 
                 {/* Category Badge */}

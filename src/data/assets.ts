@@ -167,12 +167,21 @@ export const projectAssets: LocalAsset[] = [
 // Certificate Assets
 export const certificateAssets: LocalAsset[] = [
   {
+<<<<<<< HEAD
     id: 'pes-certificate',
     name: 'PES University Certificate',
     type: 'image',
     path: '/assets/images/certificates/Pes.jpg',
     category: 'certificate',
     description: 'Hacksprint 5.0 a 24-hours National Level Hackathon conducted by P. E. S. College of Engineering, Mandya',
+=======
+    id: 'aws-certificate',
+    name: 'AWS Cloud Practitioner Certificate',
+    type: 'image',
+    path: '/assets/images/certificates/aws-cloud-practitioner.jpg',
+    category: 'certificate',
+    description: 'AWS Certified Cloud Practitioner certificate',
+>>>>>>> 607451ce04bafb3836e806fd986a1018822accd2
     dimensions: '1200x900px (4:3 aspect ratio)',
     size: '< 800KB',
     requirements: 'High resolution scan/screenshot of official AWS certificate'
@@ -222,6 +231,7 @@ export const certificateAssets: LocalAsset[] = [
     requirements: 'CNCF CKA certification document'
   },
   {
+<<<<<<< HEAD
     id: 'html-introduction',
     name: 'HTML Introduction Certificate',
     type: 'image',
@@ -231,6 +241,17 @@ export const certificateAssets: LocalAsset[] = [
     dimensions: '1200x900px (4:3 aspect ratio)',
     size: '< 800KB',
     requirements: 'IIT Bombay HTML certification document'
+=======
+    id: 'react-certificate',
+    name: 'Advanced React Certificate',
+    type: 'image',
+    path: '/assets/images/certificates/react-advanced.jpg',
+    category: 'certificate',
+    description: 'Meta Advanced React Development certificate',
+    dimensions: '1200x900px (4:3 aspect ratio)',
+    size: '< 800KB',
+    requirements: 'Meta/Facebook React certification document'
+>>>>>>> 607451ce04bafb3836e806fd986a1018822accd2
   },
   {
     id: 'python-certificate',
@@ -244,6 +265,7 @@ export const certificateAssets: LocalAsset[] = [
     requirements: 'IBM Python certification document'
   },
   {
+<<<<<<< HEAD
     id: 'java-introduction',
     name: 'Java Course Mastering the Fundamentals',
     type: 'image',
@@ -255,6 +277,8 @@ export const certificateAssets: LocalAsset[] = [
     requirements: 'Scaler certification document'
   },
   {
+=======
+>>>>>>> 607451ce04bafb3836e806fd986a1018822accd2
     id: 'gcp-certificate',
     name: 'Google Cloud Associate Certificate',
     type: 'image',
@@ -313,7 +337,54 @@ export const experienceAssets: LocalAsset[] = [
     size: '< 1MB',
     requirements: 'Technical work, model training, or research documentation'
   },
+<<<<<<< HEAD
 
+=======
+  {
+    id: 'startup-1',
+    name: 'Startup Accelerator Team',
+    type: 'image',
+    path: '/assets/images/experience/startup-team.jpg',
+    category: 'experience',
+    description: 'Team collaboration at startup',
+    dimensions: '800x600px (4:3 aspect ratio)',
+    size: '< 1MB',
+    requirements: 'Team photo, collaborative work, or startup environment'
+  },
+  {
+    id: 'startup-2',
+    name: 'Startup Development Work',
+    type: 'image',
+    path: '/assets/images/experience/startup-development.jpg',
+    category: 'experience',
+    description: 'Full stack development work',
+    dimensions: '800x600px (4:3 aspect ratio)',
+    size: '< 1MB',
+    requirements: 'Development setup, coding session, or project demo'
+  },
+  {
+    id: 'enterprise-1',
+    name: 'Enterprise Solutions Office',
+    type: 'image',
+    path: '/assets/images/experience/enterprise-office.jpg',
+    category: 'experience',
+    description: 'Professional work environment',
+    dimensions: '800x600px (4:3 aspect ratio)',
+    size: '< 1MB',
+    requirements: 'Corporate environment, professional setting'
+  },
+  {
+    id: 'enterprise-2',
+    name: 'Enterprise Project Work',
+    type: 'image',
+    path: '/assets/images/experience/enterprise-project.jpg',
+    category: 'experience',
+    description: 'Backend development and database work',
+    dimensions: '800x600px (4:3 aspect ratio)',
+    size: '< 1MB',
+    requirements: 'Technical work, database design, or system architecture'
+  }
+>>>>>>> 607451ce04bafb3836e806fd986a1018822accd2
 ];
 
 // Utility function to get asset by ID
