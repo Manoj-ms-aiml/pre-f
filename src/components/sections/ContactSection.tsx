@@ -14,6 +14,7 @@ import {
   MessageSquare
 } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
+import { sendContactEmail, EmailData } from '../../services/emailService';
 
 interface FormData {
   name: string;
@@ -123,15 +124,27 @@ export const ContactSection: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Send email using EmailJS
+      const emailData: EmailData = {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      };
+
+      const success = await sendContactEmail(emailData);
       
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      if (success) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
       
       // Reset success status after 5 seconds
       setTimeout(() => setSubmitStatus('idle'), 5000);
     } catch (error) {
+      console.error('Error sending email:', error);
       setSubmitStatus('error');
       setTimeout(() => setSubmitStatus('idle'), 5000);
     } finally {
@@ -510,7 +523,7 @@ export const ContactSection: React.FC = () => {
                       className="mt-6 p-4 rounded-lg bg-green-500/20 border border-green-500/30 text-green-400 flex items-center"
                     >
                       <CheckCircle size={20} className="mr-2" />
-                      <span className="font-tech">Message sent successfully! I'll get back to you soon.</span>
+                      <span className="font-tech">Message sent successfully to manojmsaiml@gmail.com! I'll get back to you soon.</span>
                     </motion.div>
                   )}
                   
@@ -522,7 +535,7 @@ export const ContactSection: React.FC = () => {
                       className="mt-6 p-4 rounded-lg bg-red-500/20 border border-red-500/30 text-red-400 flex items-center"
                     >
                       <AlertCircle size={20} className="mr-2" />
-                      <span className="font-tech">Failed to send message. Please try again or contact me directly.</span>
+                      <span className="font-tech">Failed to send message. Please try again or contact me directly at manojmsaiml@gmail.com.</span>
                     </motion.div>
                   )}
                 </AnimatePresence>

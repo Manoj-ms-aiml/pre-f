@@ -167,3 +167,78 @@ The system will automatically fall back to placeholder images if local assets fa
 - Automatic compression and optimization
 
 The portfolio now uses a robust local asset management system for better performance, reliability, and control over your content!
+
+## Email Configuration
+
+The contact form is configured to send emails to `manojmsaiml@gmail.com` using EmailJS.
+
+### Setup Instructions:
+
+1. **Create EmailJS Account**:
+   - Go to [EmailJS](https://www.emailjs.com/)
+   - Sign up for a free account
+
+2. **Add Email Service**:
+   - Go to Email Services in your EmailJS dashboard
+   - Add Gmail service and connect your account
+   - Note down the Service ID
+
+3. **Create Email Template**:
+   - Go to Email Templates
+   - Create a new template with these variables:
+     - `{{from_name}}` - Sender's name
+     - `{{from_email}}` - Sender's email
+     - `{{subject}}` - Email subject
+     - `{{message}}` - Email message
+     - `{{to_email}}` - Your email (manojmsaiml@gmail.com)
+   - Save the template and note the Template ID
+
+4. **Get Public Key**:
+   - Go to Account settings
+   - Copy your Public Key
+
+5. **Update Configuration**:
+   - Open `src/services/emailService.ts`
+   - Replace the placeholder values with your actual EmailJS credentials:
+     - `EMAILJS_SERVICE_ID`
+     - `EMAILJS_TEMPLATE_ID`
+     - `EMAILJS_PUBLIC_KEY`
+
+6. **Test the Contact Form**:
+   - Fill out the contact form on your portfolio
+   - Check your email for the message
+   - Verify everything works correctly
+
+### Email Template Example:
+
+```
+Subject: Portfolio Contact: {{subject}}
+
+New contact form submission:
+
+Name: {{from_name}}
+Email: {{from_email}}
+Subject: {{subject}}
+
+Message:
+{{message}}
+
+---
+Reply to: {{from_email}}
+```
+
+### Features:
+- ✅ Automatic email sending to manojmsaiml@gmail.com
+- ✅ Form validation and error handling
+- ✅ Success/error status messages
+- ✅ Professional email formatting
+- ✅ Sender's email included for easy replies
+- ✅ No backend server required
+- ✅ Free tier available (200 emails/month)
+
+### Alternative: Formspree
+If you prefer using Formspree instead of EmailJS:
+1. Go to [Formspree](https://formspree.io/)
+2. Create a form endpoint
+3. Update the `sendEmailViaFormspree` function in `emailService.ts`
+4. Replace the EmailJS implementation with Formspree
