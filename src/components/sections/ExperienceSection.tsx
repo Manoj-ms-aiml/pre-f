@@ -422,21 +422,27 @@ export const ExperienceSection: React.FC = () => {
                 <motion.p
                   className="text-white/80 font-body leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base"
                 >
-                  This experience provided valuable insights into {experiences[currentIndex]?.category} 
-                  and contributed to my understanding of collaborative work environments, 
-                  problem-solving methodologies, and professional development.
+                  {experiences[currentIndex]?.insights}
                 </motion.p>
+
+                {/* Duration */}
+                <div className="mb-4 sm:mb-6">
+                  <h5 className="text-white font-tech font-semibold mb-2 text-sm sm:text-base">Duration:</h5>
+                  <div className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-tech ${
+                    theme.mode === 'theatrical'
+                      ? 'bg-theatrical-gold/20 text-theatrical-gold border border-theatrical-gold/30'
+                      : 'bg-tech-cyan/20 text-tech-cyan border border-tech-cyan/30'
+                  }`}>
+                    <Calendar size={12} />
+                    <span>{experiences[currentIndex]?.startDate} - {experiences[currentIndex]?.endDate}</span>
+                  </div>
+                </div>
 
                 {/* Skills Gained */}
                 <div className="space-y-4">
                   <h5 className="text-white font-tech font-semibold text-sm sm:text-base">Key Learnings:</h5>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
-                    {[
-                      'Team Collaboration',
-                      'Technical Skills',
-                      'Problem Solving',
-                      'Communication'
-                    ].map((skill, index) => (
+                    {experiences[currentIndex]?.keyLearnings.map((skill, index) => (
                       <motion.div
                         key={skill}
                         className="flex items-center space-x-2 text-white/70 text-xs sm:text-sm"

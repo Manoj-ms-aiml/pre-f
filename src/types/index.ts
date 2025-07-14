@@ -20,6 +20,10 @@ export interface Experience {
   production: string;
   director: string;
   year: number;
+  startDate: string;
+  endDate: string;
+  insights: string;
+  keyLearnings: string[];
   description: string;
   images: string[];
   category: 'tech' | 'research' | 'internship' | 'project';
@@ -38,6 +42,8 @@ export interface Certificate {
   title: string;
   issuer: string;
   date: string;
+  uniqueDetails: string;
+  skillsValidated: string[];
   description: string;
   image: string;
   credentialId: string;

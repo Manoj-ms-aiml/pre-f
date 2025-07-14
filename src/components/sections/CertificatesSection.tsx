@@ -400,36 +400,14 @@ export const CertificatesSection: React.FC = () => {
                 <motion.p
                   className="text-white/80 font-body leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base"
                 >
-                  This certification validates my expertise in {filteredCertificates[currentIndex]?.category.replace('-', ' ')} and demonstrates my commitment to staying current with industry best practices and emerging technologies.
+                  {filteredCertificates[currentIndex]?.uniqueDetails}
                 </motion.p>
 
                 {/* Category Badge */}
                 <div className="space-y-4">
-                  <h5 className="text-white font-tech font-semibold text-sm sm:text-base">Category:</h5>
-                  <motion.span
-                    className={`inline-block px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-tech font-medium ${
-                      theme.mode === 'theatrical'
-                        ? 'bg-theatrical-gold/20 text-theatrical-gold border border-theatrical-gold/30'
-                        : 'bg-tech-cyan/20 text-tech-cyan border border-tech-cyan/30'
-                    }`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
-                  >
-                    {filteredCertificates[currentIndex]?.category.replace('-', ' ').toUpperCase()}
-                  </motion.span>
-                </div>
-
-                {/* Skills Gained */}
-                <div className="mt-6 sm:mt-8">
-                  <h5 className="text-white font-tech font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Skills Validated:</h5>
+                  <h5 className="text-white font-tech font-semibold text-sm sm:text-base">Skills Validated:</h5>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
-                    {[
-                      'Technical Proficiency',
-                      'Best Practices',
-                      'Industry Standards',
-                      'Problem Solving'
-                    ].map((skill, index) => (
+                    {filteredCertificates[currentIndex]?.skillsValidated.map((skill, index) => (
                       <motion.div
                         key={skill}
                         className="flex items-center space-x-2 text-white/70 text-xs sm:text-sm"
@@ -442,6 +420,23 @@ export const CertificatesSection: React.FC = () => {
                       </motion.div>
                     ))}
                   </div>
+                </div>
+
+                {/* Category Badge */}
+                <div className="mt-6 sm:mt-8">
+                  <h5 className="text-white font-tech font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Category:</h5>
+                  <motion.span
+                    className={`inline-block px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-tech font-medium ${
+                      theme.mode === 'theatrical'
+                        ? 'bg-theatrical-gold/20 text-theatrical-gold border border-theatrical-gold/30'
+                        : 'bg-tech-cyan/20 text-tech-cyan border border-tech-cyan/30'
+                    }`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                  >
+                    {filteredCertificates[currentIndex]?.category.replace('-', ' ').toUpperCase()}
+                  </motion.span>
                 </div>
               </motion.div>
             </div>
