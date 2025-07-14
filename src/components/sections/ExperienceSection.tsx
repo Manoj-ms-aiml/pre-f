@@ -342,11 +342,7 @@ export const ExperienceSection: React.FC = () => {
                     }`} />
                     
                     {/* Play Button Overlay */}
-<<<<<<< HEAD
-                    {/* <motion.div
-=======
                     <motion.div
->>>>>>> 607451ce04bafb3836e806fd986a1018822accd2
                       className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300"
                       whileHover={{ scale: 1.1 }}
                     >
@@ -357,11 +353,7 @@ export const ExperienceSection: React.FC = () => {
                       }`}>
                         <Play size={24} color={theme.primaryColor} className="sm:w-8 sm:h-8" />
                       </div>
-<<<<<<< HEAD
-                    </motion.div> */}
-=======
                     </motion.div>
->>>>>>> 607451ce04bafb3836e806fd986a1018822accd2
                   </div>
 
                   {/* Experience Info */}
@@ -430,13 +422,9 @@ export const ExperienceSection: React.FC = () => {
                 <motion.p
                   className="text-white/80 font-body leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base"
                 >
-<<<<<<< HEAD
-                  This experience provided valuable insights into {experiences[currentIndex]?.category} and contributed to my understanding of collaborative work environments,problem-solving methodologies, and professional development.
-=======
                   This experience provided valuable insights into {experiences[currentIndex]?.category} 
                   and contributed to my understanding of collaborative work environments, 
                   problem-solving methodologies, and professional development.
->>>>>>> 607451ce04bafb3836e806fd986a1018822accd2
                 </motion.p>
 
                 {/* Skills Gained */}

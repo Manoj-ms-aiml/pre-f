@@ -3,7 +3,6 @@ import { getAssetById, getFallbackImage } from './assets';
 
 export const certificates: Certificate[] = [
   {
-<<<<<<< HEAD
     id: 'pes-certificate',
     title: 'HackSprint 5.0 Paricipation Certificate',
     issuer: 'PES University',
@@ -13,17 +12,6 @@ export const certificates: Certificate[] = [
     credentialId: 'Shadow minds',
     verificationUrl: 'https://drive.google.com/file/d/11edLQMgrxSkfWBsq5JJ4tL8EuhmZx80F/view?usp=drive_link',
     category: 'ai-ml',
-=======
-    id: 'aws-cloud-practitioner',
-    title: 'AWS Certified Cloud Practitioner',
-    issuer: 'Amazon Web Services',
-    date: '2024',
-    description: 'Foundational understanding of AWS Cloud concepts, services, security, architecture, pricing, and support.',
-    image: getAssetById('aws-certificate')?.path || getFallbackImage('certificate'),
-    credentialId: 'AWS-CCP-2024-001',
-    verificationUrl: 'https://aws.amazon.com/certification/verify',
-    category: 'cloud',
->>>>>>> 607451ce04bafb3836e806fd986a1018822accd2
     featured: true
   },
   {
@@ -75,7 +63,6 @@ export const certificates: Certificate[] = [
     featured: false
   },
   {
-<<<<<<< HEAD
     id: 'html-introduction',
     title: 'Introduction to HTML',
     issuer: 'IIT Bombay',
@@ -84,16 +71,6 @@ export const certificates: Certificate[] = [
     image: getAssetById('html-introduction')?.path || getFallbackImage('certificate'),
     credentialId: '3773291I2Q',
     verificationUrl: 'https://drive.google.com/file/d/1pVFZMUWDdlKvpqL0Ncc91Qd61rhiPiro/view?usp=sharing',
-=======
-    id: 'react-advanced',
-    title: 'Advanced React Development',
-    issuer: 'Meta',
-    date: '2023',
-    description: 'Advanced concepts in React including hooks, context, performance optimization, and testing.',
-    image: getAssetById('react-certificate')?.path || getFallbackImage('certificate'),
-    credentialId: 'META-REACT-2023-006',
-    verificationUrl: 'https://coursera.org/verify',
->>>>>>> 607451ce04bafb3836e806fd986a1018822accd2
     category: 'web-dev',
     featured: false
   },
@@ -109,7 +86,6 @@ export const certificates: Certificate[] = [
     category: 'programming',
     featured: false
   },
-<<<<<<< HEAD
  {
     id: 'java-introduction',
     title: 'Java Course certificate- Mastering the Fundamentals',
@@ -122,8 +98,6 @@ export const certificates: Certificate[] = [
     category: 'programming',
     featured: false
   },
-=======
->>>>>>> 607451ce04bafb3836e806fd986a1018822accd2
   {
     id: 'gcp-associate',
     title: 'Google Cloud Associate Cloud Engineer',

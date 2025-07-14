@@ -417,9 +417,6 @@ export const HeroSection: React.FC = () => {
                   : 'from-tech-matrix/30 via-transparent to-tech-cyan/20'
               }`} />
               
-<<<<<<< HEAD
-             
-=======
               {/* Floating Particles */}
               <div className="absolute inset-0 pointer-events-none">
                 {[...Array(8)].map((_, i) => (
@@ -445,7 +442,6 @@ export const HeroSection: React.FC = () => {
                   />
                 ))}
               </div>
->>>>>>> 607451ce04bafb3836e806fd986a1018822accd2
             </div>
 
             {/* Rotating Tech Icons */}

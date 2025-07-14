@@ -90,15 +90,6 @@ export const skills: Skill[] = [
     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg', 
     color: '#339933' 
   },
-<<<<<<< HEAD
-{
-  id: 'flask',
-  name: 'Flask',
-  category: 'web',
-  icon: 'https://vectorlogo.zone/logos/palletsprojects_flask/flask-white.svg', // white variant
-  color: '#ffffff'
-},
-=======
   { 
     id: 'express', 
     name: 'Express.js', 
@@ -113,7 +104,6 @@ export const skills: Skill[] = [
     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original-wordmark.svg', 
     color: '#000000' 
   },
->>>>>>> 607451ce04bafb3836e806fd986a1018822accd2
   { 
     id: 'html5', 
     name: 'HTML5', 
@@ -145,8 +135,6 @@ export const skills: Skill[] = [
     color: '#2496ed' 
   },
   { 
-<<<<<<< HEAD
-=======
     id: 'aws', 
     name: 'AWS', 
     category: 'tools', 
@@ -154,7 +142,6 @@ export const skills: Skill[] = [
     color: '#ff9900' 
   },
   { 
->>>>>>> 607451ce04bafb3836e806fd986a1018822accd2
     id: 'gcp', 
     name: 'Google Cloud', 
     category: 'tools', 
