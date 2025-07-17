@@ -7,7 +7,6 @@ import { useSmoothScroll } from '../../hooks/useSmoothScroll';
 import { projects } from '../../data/projects';
 import { Project } from '../../types';
 import { ImageWithFallback } from '../common/ImageWithFallback';
-import { getFallbackImage } from '../../data/assets';
 
 export const ProjectsSection: React.FC = () => {
   const { theme } = useTheme();
@@ -295,7 +294,7 @@ export const ProjectsSection: React.FC = () => {
                   <div className="relative h-64 lg:h-80 overflow-hidden">
                     <ImageWithFallback
                       src={filteredProjects[currentIndex]?.images[0]}
-                      fallbackSrc={getFallbackImage('project')}
+                      fallbackSrc="https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&w=800&h=600"
                       alt={filteredProjects[currentIndex]?.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="eager"
@@ -497,7 +496,7 @@ export const ProjectsSection: React.FC = () => {
                     <ImageWithFallback
                       key={index}
                       src={image}
-                      fallbackSrc={getFallbackImage('project')}
+                      fallbackSrc="https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&w=800&h=600"
                       alt={`${selectedProject.title} ${index + 1}`}
                       className="w-full h-48 object-cover rounded-lg"
                       loading="lazy"

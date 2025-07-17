@@ -6,7 +6,6 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { certificates } from '../../data/certificates';
 import { Certificate } from '../../types';
 import { ImageWithFallback } from '../common/ImageWithFallback';
-import { getFallbackImage } from '../../data/assets';
 
 export const CertificatesSection: React.FC = () => {
   const { theme } = useTheme();
@@ -298,7 +297,7 @@ export const CertificatesSection: React.FC = () => {
                         <>
                     <ImageWithFallback
                       src={filteredCertificates[currentIndex]?.image}
-                      fallbackSrc={getFallbackImage('certificate')}
+                      fallbackSrc="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800&h=600"
                       alt={filteredCertificates[currentIndex]?.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="eager"
