@@ -5,8 +5,8 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useSmoothScroll } from '../../hooks/useSmoothScroll';
 import { gsap } from 'gsap';
-import { getAssetById, getFallbackImage } from '../../data/assets';
-import { ImageWithFallback } from '../common/ImageWithFallback';
+import { getAssetById, getFallbackImage, generateResponsiveSizes } from '../../data/assets';
+import { ImageWithFallback, OptimizedLogo } from '../common/ImageWithFallback';
 import '../../styles/animations.css';
 
 export const HeroSection: React.FC = () => {
@@ -408,6 +408,8 @@ export const HeroSection: React.FC = () => {
                 alt="Manoj MS"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 loading="eager"
+                priority={true}
+                sizes={generateResponsiveSizes(384)}
               />
               
               {/* Overlay Gradient */}
@@ -437,7 +439,18 @@ export const HeroSection: React.FC = () => {
                     transition={{
                       duration: 3 + Math.random() * 2,
                       repeat: Infinity,
-                      delay: Math.random() * 2,
+                    className="w-12 h-12 md:w-16 md:h-16 object-contain transition-transform duration-300"
+                    loading="eager"
+                    decoding="async"
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = `data:image/svg+xml;base64,${btoa(`
+                        <svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+                          <rect width="64" height="64" fill="${role.color}" rx="8"/>
+                          <text x="32" y="38" text-anchor="middle" fill="white" font-size="32">⚡</text>
+                        </svg>
+                      `)}`;
                     }}
                   />
                 ))}

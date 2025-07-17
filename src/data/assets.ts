@@ -415,14 +415,16 @@ export const checkImageExists = async (url: string): Promise<boolean> => {
 };
 
 // Function to get optimized image URL
-export const getOptimizedImageUrl = (url: string, width?: number, height?: number): string => {
+export const getOptimizedImageUrl = (url: string, width?: number, height?: number, quality: number = 80): string => {
   // If it's a Pexels URL, add optimization parameters
   if (url.includes('pexels.com')) {
     const urlObj = new URL(url);
     if (width) urlObj.searchParams.set('w', width.toString());
     if (height) urlObj.searchParams.set('h', height.toString());
+    urlObj.searchParams.set('q', quality.toString());
     urlObj.searchParams.set('auto', 'compress');
     urlObj.searchParams.set('cs', 'tinysrgb');
+    urlObj.searchParams.set('fit', 'crop');
     return urlObj.toString();
   }
   return url;
@@ -431,14 +433,53 @@ export const getOptimizedImageUrl = (url: string, width?: number, height?: numbe
 // Function to get fallback image for missing assets
 export const getFallbackImage = (category: LocalAsset['category']): string => {
   const fallbacks = {
-    profile: getOptimizedImageUrl('https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg', 400),
-    project: getOptimizedImageUrl('https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg', 800),
-    certificate: getOptimizedImageUrl('https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg', 800),
-    experience: getOptimizedImageUrl('https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg', 800)
+    profile: getOptimizedImageUrl('https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg', 400, 400, 85),
+    project: getOptimizedImageUrl('https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg', 800, 600, 80),
+    certificate: getOptimizedImageUrl('https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg', 800, 600, 80),
+    experience: getOptimizedImageUrl('https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg', 800, 600, 80)
   };
   return fallbacks[category];
 };
 
+// Generate responsive image sizes
+export const generateResponsiveSizes = (baseWidth: number): string => {
+  return `(max-width: 640px) ${Math.round(baseWidth * 0.5)}px, (max-width: 1024px) ${Math.round(baseWidth * 0.75)}px, ${baseWidth}px`;
+};
+
+// Create WebP fallback URLs
+export const getWebPUrl = (url: string): string => {
+  if (url.includes('pexels.com')) {
+    const urlObj = new URL(url);
+    urlObj.searchParams.set('fm', 'webp');
+    return urlObj.toString();
+  }
+  return url;
+};
+
+// Preload critical images with priority
+export const preloadCriticalImages = async (): Promise<void> => {
+  const criticalImages = [
+    '/img/manoj.jpg',
+    '/assets/images/profile/manoj-profile.jpg',
+    getFallbackImage('profile'),
+    getFallbackImage('project')
+  ];
+
+  const preloadPromises = criticalImages.map(url => {
+    return new Promise<void>((resolve) => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = url;
+      link.onload = () => resolve();
+      link.onerror = () => resolve(); // Don't fail on error
+      document.head.appendChild(link);
+    });
+  });
+
+  await Promise.allSettled(preloadPromises);
+  console.log('✅ Critical images preloaded');
+};
 // Auto-detect and load local assets
 export const autoLoadAssets = async (): Promise<void> => {
   console.log('🔍 Auto-detecting local assets...');

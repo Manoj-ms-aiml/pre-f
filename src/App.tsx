@@ -11,22 +11,15 @@ import { SkillsSection } from './components/sections/SkillsSection';
 import { ContactSection } from './components/sections/ContactSection';
 import AnimatedIntro from './components/common/AnimatedIntro';
 import { useEffect } from 'react';
+import { preloadCriticalImages } from './data/assets';
 
 function App() {
   const [showIntro, setShowIntro] = useState(true);
 
-  // Simplified asset loading
+  // Enhanced asset loading with critical image preloading
   useEffect(() => {
-    // Preload critical images only
-    const criticalImages = [
-      '/img/manoj.jpg',
-      'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=400'
-    ];
-    
-    criticalImages.forEach(src => {
-      const img = new Image();
-      img.src = src;
-    });
+    // Preload critical images for better performance
+    preloadCriticalImages();
   }, []);
 
   const handleIntroComplete = () => {

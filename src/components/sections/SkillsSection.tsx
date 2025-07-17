@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { Brain, Code, Globe, Wrench, Heart, Play, Pause, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 import { skills } from '../../data/skills';
+import { OptimizedLogo } from '../common/ImageWithFallback';
 
 const categoryIcons = {
   'programming': Code,
@@ -385,13 +386,18 @@ export const SkillsSection: React.FC = () => {
                           <img 
                             src={skill.icon} 
                             alt={skill.name}
-                            className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto object-contain"
+                            className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto object-contain transition-transform duration-300"
                             loading="lazy"
+                            decoding="async"
                             onError={(e) => {
                               // Fallback to a default icon if image fails to load
                               const target = e.target as HTMLImageElement;
-                              target.style.display = 'none';
-                              target.parentElement!.innerHTML = '⚡';
+                              target.src = `data:image/svg+xml;base64,${btoa(`
+                                <svg width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+                                  <rect width="48" height="48" fill="${skill.color}" rx="8"/>
+                                  <text x="24" y="28" text-anchor="middle" fill="white" font-size="24">⚡</text>
+                                </svg>
+                              `)}`;
                             }}
                           />
                         </motion.div>
