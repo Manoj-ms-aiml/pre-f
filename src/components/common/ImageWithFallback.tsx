@@ -138,6 +138,7 @@ export const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
           sizes={sizes}
           onLoad={handleLoad}
           onError={handleError}
+          crossOrigin="anonymous"
           className={`w-full h-full object-cover transition-opacity duration-300 ${
             isLoading ? 'opacity-0' : 'opacity-100'
           }`}
